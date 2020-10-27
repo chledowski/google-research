@@ -35,8 +35,12 @@ if __name__ == "__main__":
 
   if args.policy_type == "belady":
     replacement_policy = belady.BeladyPolicy(env)
+    print(1, replacement_policy)
+    print(2, replacement_policy.__dict__)
+    print("Using Belady")
   elif args.policy_type == "lru":
     replacement_policy = policy.LRU()
+    print("Using lru.")
   elif args.policy_type == "s4lru":
     replacement_policy = s4lru.S4LRU(config.get("associativity"))
   elif args.policy_type == "belady_nearest_neighbors":
