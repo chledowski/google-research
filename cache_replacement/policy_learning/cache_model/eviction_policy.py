@@ -53,12 +53,12 @@ class LearnedScorer(eviction_policy.CacheLineScorer):
     """
     device = "cpu"
     if torch.cuda.is_available():
-      print(10, 'cuda')
       torch.set_default_tensor_type(torch.cuda.FloatTensor)
       device = "cuda:0"
 
     scoring_model = model.EvictionPolicyModel.from_config(model_config).to(
         torch.device(device))
+    print(9, scoring_model.keys())
 
     if model_checkpoint is not None:
       print(10, model_checkpoint)
