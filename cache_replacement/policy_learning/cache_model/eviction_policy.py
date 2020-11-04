@@ -65,7 +65,7 @@ class LearnedScorer(eviction_policy.CacheLineScorer):
             with open(model_checkpoint, "rb") as f:
                 ckpt = torch.load(f, map_location=device)
                 print(12, ckpt.keys())
-                scoring_model.load_state_dict(ckpt)
+                scoring_model.load_state_dict(ckpt, strict=False)
         return cls(scoring_model)
 
     def __call__(self, cache_access, access_times):
