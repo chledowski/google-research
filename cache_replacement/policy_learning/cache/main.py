@@ -91,7 +91,7 @@ def main(_):
   tb_writer = tf.summary.FileWriter(tensorboard_dir)
   miss_trace_path = os.path.join(exp_dir, "misses.csv")
   evict_trace_path = os.path.join(exp_dir, "evictions.txt")
-
+  print(0, FLAGS.config_bindings)
   cache_config = cfg.Config.from_files_and_bindings(
       FLAGS.cache_configs, FLAGS.config_bindings)
   with open(os.path.join(exp_dir, "cache_config.json"), "w") as f:
