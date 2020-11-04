@@ -55,12 +55,9 @@ class Config(object):
         configs.append(cls.from_file(config_file))
 
     merged_config = cls.merge(configs)
-    print(1, merged_config)
     for binding in bindings:
-      print(2, binding)
       key, value = binding.split("=", 1)
       merged_config.set(key, ast.literal_eval(value))
-    print(3, merged_config)
     return merged_config
 
   @classmethod

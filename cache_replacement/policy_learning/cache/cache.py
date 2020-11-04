@@ -192,6 +192,8 @@ class Cache(object):
         raise ValueError("Invalid policy type: {}".format(policy_type))
 
     if eviction_policy is None:
+      print(1, config.get("eviction_policy"))
+      print(2, trace)
       eviction_policy = eviction_policy_from_config(
           config.get("eviction_policy"), trace)
     return cls(config.get("capacity"), eviction_policy,
