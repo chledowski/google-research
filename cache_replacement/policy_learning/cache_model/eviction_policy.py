@@ -58,13 +58,12 @@ class LearnedScorer(eviction_policy.CacheLineScorer):
 
         scoring_model = model.EvictionPolicyModel.from_config(model_config).to(
             torch.device(device))
-        print(9, scoring_model.__dict__)
+        print(9, scoring_model.__dict__.keys())
 
         if model_checkpoint is not None:
             print(10, model_checkpoint)
             with open(model_checkpoint, "rb") as f:
                 ckpt = torch.load(f, map_location=device)
-                print(11, ckpt)
                 print(12, ckpt.keys())
                 scoring_model.load_state_dict(ckpt)
         return cls(scoring_model)
