@@ -61,6 +61,7 @@ class LearnedScorer(eviction_policy.CacheLineScorer):
         torch.device(device))
 
     if model_checkpoint is not None:
+      print(10, model_checkpoint)
       with open(model_checkpoint, "rb") as f:
         ckpt = torch.load(f, map_location=device)
         print(11, ckpt)
