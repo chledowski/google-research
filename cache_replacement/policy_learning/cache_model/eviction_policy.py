@@ -53,6 +53,7 @@ class LearnedScorer(eviction_policy.CacheLineScorer):
     """
     device = "cpu"
     if torch.cuda.is_available():
+      print(10, 'cuda')
       torch.set_default_tensor_type(torch.cuda.FloatTensor)
       device = "cuda:0"
 
@@ -61,6 +62,7 @@ class LearnedScorer(eviction_policy.CacheLineScorer):
 
     if model_checkpoint is not None:
       with open(model_checkpoint, "rb") as f:
+        print(11, f.keys())
         scoring_model.load_state_dict(torch.load(f, map_location=device))
     return cls(scoring_model)
 
