@@ -83,6 +83,10 @@ flags.DEFINE_integer(
 flags.DEFINE_bool(
     "save_2n", False,
     "If true, saves every 2^n examples ")
+flags.DEFINE_bool(
+    "save_list", False,
+    "If true, saves with schedule as in eval_list ")
+eval_list = [10, 100, 1000, 2000, 4000, 8000, 12000, 16000, 20000, 25000, 30000, 40000, 50000, 75000, 100000],
 flags.DEFINE_integer(
     "full_eval_freq", 48000,
     "Steps between evaluating on ALL of validation data.")
@@ -523,6 +527,14 @@ def main(_):
                                  "on_policy_valid" + suffix, tb_writer, predictions_dir)
 
                     if FLAGS.save_2n and step in [2**n for n in range(1, 30)]:
+                        evaluate_helper(FLAGS.small_eval_size, "")
+                        save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
+                        with open(save_path, "wb") as save_file:
+                            checkpoint_buffer = io.BytesIO()
+                            torch.save(policy_model.state_dict(), checkpoint_buffer)
+                            logging.info("Saving model checkpoint to: %s", save_path)
+                            save_file.write(checkpoint_buffer.getvalue())
+                    elif FLAGS.save_list and step in eval_list:
                         evaluate_helper(FLAGS.small_eval_size, "")
                         save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
                         with open(save_path, "wb") as save_file:
