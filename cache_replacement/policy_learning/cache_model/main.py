@@ -393,7 +393,7 @@ def main(_):
     np.random.seed(FLAGS.seed)
     torch.random.manual_seed(FLAGS.seed)
 
-    if not FLAGS.save_2n:
+    if not (FLAGS.save_2n or FLAGS.save_list):
         if FLAGS.save_freq % FLAGS.small_eval_freq != 0:
             raise ValueError(
                 ("Save frequency ({}) must be a multiple of evaluation frequency ({})."
@@ -439,6 +439,8 @@ def main(_):
     with open(os.path.join(exp_dir, "dagger_config.json"), "w") as f:
         dagger_schedule_config.to_file(f)
     dagger_schedule = schedule_from_config(dagger_schedule_config)
+
+    logging.info(f"Saving config: save_2n-{FLAGS.save_2n}, save_list-{FLAGS.save_list}, small_eval_size-{FLAGS.small_eval_size}")
 
     # Process everything on GPU if available
     device = torch.device("cpu")
@@ -526,22 +528,24 @@ def main(_):
                         evaluate(policy_model, on_policy_valid_data[-eval_size:], step,
                                  "on_policy_valid" + suffix, tb_writer, predictions_dir)
 
-                    if FLAGS.save_2n and step in [2**n for n in range(1, 30)]:
-                        evaluate_helper(FLAGS.small_eval_size, "")
-                        save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
-                        with open(save_path, "wb") as save_file:
-                            checkpoint_buffer = io.BytesIO()
-                            torch.save(policy_model.state_dict(), checkpoint_buffer)
-                            logging.info("Saving model checkpoint to: %s", save_path)
-                            save_file.write(checkpoint_buffer.getvalue())
-                    elif FLAGS.save_list and step in eval_list:
-                        evaluate_helper(FLAGS.small_eval_size, "")
-                        save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
-                        with open(save_path, "wb") as save_file:
-                            checkpoint_buffer = io.BytesIO()
-                            torch.save(policy_model.state_dict(), checkpoint_buffer)
-                            logging.info("Saving model checkpoint to: %s", save_path)
-                            save_file.write(checkpoint_buffer.getvalue())
+                    if FLAGS.save_2n:
+                        if step in [2**n for n in range(1, 30)]:
+                            evaluate_helper(FLAGS.small_eval_size, "")
+                            save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
+                            with open(save_path, "wb") as save_file:
+                                checkpoint_buffer = io.BytesIO()
+                                torch.save(policy_model.state_dict(), checkpoint_buffer)
+                                logging.info("Saving model checkpoint to: %s", save_path)
+                                save_file.write(checkpoint_buffer.getvalue())
+                    elif FLAGS.save_list:
+                        if step in eval_list:
+                            evaluate_helper(FLAGS.small_eval_size, "")
+                            save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
+                            with open(save_path, "wb") as save_file:
+                                checkpoint_buffer = io.BytesIO()
+                                torch.save(policy_model.state_dict(), checkpoint_buffer)
+                                logging.info("Saving model checkpoint to: %s", save_path)
+                                save_file.write(checkpoint_buffer.getvalue())
                     else:
                         if step % FLAGS.small_eval_freq == 0:
                             evaluate_helper(FLAGS.small_eval_size, "")
