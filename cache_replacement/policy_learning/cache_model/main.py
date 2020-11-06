@@ -538,6 +538,7 @@ def main(_):
                                 logging.info("Saving model checkpoint to: %s", save_path)
                                 save_file.write(checkpoint_buffer.getvalue())
                     elif FLAGS.save_list:
+                        print(f'save_list: {step} {eval_list}, {step in eval_list}.')
                         if step in eval_list:
                             evaluate_helper(FLAGS.small_eval_size, "")
                             save_path = os.path.join(checkpoints_dir, "{}.ckpt".format(step))
