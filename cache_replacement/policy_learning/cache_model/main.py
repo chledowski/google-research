@@ -86,7 +86,7 @@ flags.DEFINE_bool(
 flags.DEFINE_bool(
     "save_list", False,
     "If true, saves with schedule as in eval_list ")
-eval_list = [10, 100, 1000, 2000, 4000, 8000, 12000, 16000, 20000, 25000, 30000, 40000, 50000, 75000, 100000],
+eval_list = [10, 100, 1000, 2000, 4000, 8000, 12000, 16000, 20000, 25000, 30000, 40000, 50000, 75000, 100000]
 flags.DEFINE_integer(
     "full_eval_freq", 48000,
     "Steps between evaluating on ALL of validation data.")
