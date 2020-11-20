@@ -14,7 +14,8 @@ def parse_outs(exp_folder, pred_f, evict_f):
             with open(output_file, 'w') as f_o:
                 predictions = f_p.readlines()
                 evictions = f_e.readlines()
-                print(1, predictions[:60])
+                for line in predictions[:60]:
+                    print(line)
                 print()
                 print(2, evictions[:2])
 
