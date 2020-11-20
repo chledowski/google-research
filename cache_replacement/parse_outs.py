@@ -7,7 +7,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
     pred_file = os.path.join(exp_folder, 'predictions', pred_f)
     evict_file = os.path.join(exp_folder, 'evictions', evict_f)
     output_file = os.path.join(exp_folder, 'parsed_output', evict_f)
-    os.makedirs(output_file, exist_ok=True)
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
     with open(pred_file, 'r') as f_p:
         with open(evict_file, 'r') as f_e:
