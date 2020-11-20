@@ -12,6 +12,9 @@ def parse_outs(exp_folder, pred_f, evict_f):
     with open(pred_file, 'r') as f_p:
         with open(evict_file, 'r') as f_e:
             with open(output_file, 'w') as f_o:
+                for line in f_p:
+                    if line.strip() == "":
+                        print(1)
                 predictions = f_p.readlines()
                 evictions = f_e.readlines()
                 for line in predictions[:30]:
