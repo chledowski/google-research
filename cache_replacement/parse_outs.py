@@ -17,7 +17,8 @@ def parse_outs(exp_folder, pred_f, evict_f):
                 for line in predictions[:30]:
                     print(line.strip())
                 print()
-                print(2, evictions[:2])
+                for line in evictions[:2]:
+                    print(line.strip())
 
 
 if __name__ == "__main__":
