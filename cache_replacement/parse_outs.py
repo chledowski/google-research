@@ -4,7 +4,7 @@ import os
 
 def reader(filename):
     for row in open(filename, "r"):
-        yield row.strip
+        yield row.strip()
 
 
 def parse_outs(exp_folder, pred_f, evict_f):
