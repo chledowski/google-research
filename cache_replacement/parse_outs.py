@@ -8,7 +8,6 @@ def reader(filename):
 
 
 def parse_outs(exp_folder, pred_f, evict_f):
-
     pred_file = os.path.join(exp_folder, 'predictions', pred_f)
     evict_file = os.path.join(exp_folder, 'evictions', evict_f)
     output_file = os.path.join(exp_folder, 'parsed_output', evict_f)
@@ -17,18 +16,15 @@ def parse_outs(exp_folder, pred_f, evict_f):
     pred_reader = reader(pred_file)
     evict_reader = reader(evict_file)
 
-    print(pred_reader)
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
-    print(next(pred_reader))
+    i = 0
+    while i < 2:
+        pred_line = next(pred_reader)
+        print(pred_line)
+        if pred_line == "":
+            evict_line = next(evict_reader)
+            print(evict_line)
+            i += 1
+
     # with open(pred_file, 'r') as f_p:
     #     with open(evict_file, 'r') as f_e:
     #         with open(output_file, 'w') as f_o:
