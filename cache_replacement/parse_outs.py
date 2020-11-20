@@ -2,11 +2,11 @@ import argparse
 import os
 
 
-def parse_outs(exp_folder, pred_file, evict_file):
+def parse_outs(exp_folder, pred_f, evict_f):
 
-    pred_file = os.path.join(exp_folder, 'predictions', pred_file)
-    evict_file = os.path.join(exp_folder, 'evictions', evict_file)
-    output_file = os.path.join(exp_folder, 'parsed_output', evict_file)
+    pred_file = os.path.join(exp_folder, 'predictions', pred_f)
+    evict_file = os.path.join(exp_folder, 'evictions', evict_f)
+    output_file = os.path.join(exp_folder, 'parsed_output', evict_f)
     os.makedirs(output_file, exist_ok=True)
 
     with open(pred_file, 'r') as f_p:
