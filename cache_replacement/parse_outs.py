@@ -22,8 +22,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
         if pred_line == "":
             pred_lines += 1
     for evict_line in evict_reader:
-        if evict_line == "":
-            evict_lines += 1
+        evict_lines += 1
 
     print(10, pred_lines, evict_lines)
 
