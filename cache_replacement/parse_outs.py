@@ -32,7 +32,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
     in_cache_line = False
     set_dict = {}
     instance_dict = {}
-    while i < 200:
+    while i < 100:
         pred_line = next(pred_reader)
         # print(pred_line)
         if 'PC' in pred_line:
@@ -50,7 +50,6 @@ def parse_outs(exp_folder, pred_f, evict_f):
             in_cache_line = False
         if in_cache_line and pred_line[:3] == '|  ':
             cache_line = pred_line.replace(' ', '').split('|')
-            print(cache_line)
             instance_dict['cache_lines_pc'].append(cache_line[2])
             instance_dict['cache_lines_address'].append(cache_line[3])
             instance_dict['cache_lines_pred_rank'].append(eval(cache_line[4]))
