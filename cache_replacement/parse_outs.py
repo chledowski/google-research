@@ -40,8 +40,8 @@ def parse_outs(exp_folder, pred_f, evict_f):
             print(evict_line)
             print(evict_line['pc'])
             full_line_dict = evict_line
-            assert pc_check == full_line_dict['pc'], "PC does not match between pred and evict file."
-            assert a_check == full_line_dict['address'], "Address does not match between pred and evict file."
+            # assert pc_check == full_line_dict['pc'], "PC does not match between pred and evict file."
+            # assert a_check == full_line_dict['address'], "Address does not match between pred and evict file."
             i += 1
 
     # with open(pred_file, 'r') as f_p:
