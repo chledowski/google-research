@@ -49,7 +49,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
         if 'Attention' in pred_line:
             in_cache_line = False
         if in_cache_line and pred_line[:3] == '|  ':
-            cache_line = pred_line.strip(' ').split('|')
+            cache_line = pred_line.replace(' ', '').split('|')
             print(cache_line)
             instance_dict['cache_lines_pc'].append(cache_line[2])
             instance_dict['cache_lines_address'].append(cache_line[3])
