@@ -87,7 +87,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
             # print(f"instance_dict: {instance_dict} \n")
     # print(f"set_dict: {set_dict} \n")
     print("Saving..")
-    save_obj(set_dict, 'test')
+    save_obj(set_dict, args.out_file)
 
 
     # with open(pred_file, 'r') as f_p:
@@ -112,6 +112,7 @@ if __name__ == "__main__":
     parser.add_argument('--exp-folder', required=True)
     parser.add_argument('--pred-file', required=True)
     parser.add_argument('--evict-file', required=True)
+    parser.add_argument('--out-file', required=True)
 
     args = parser.parse_args()
 
