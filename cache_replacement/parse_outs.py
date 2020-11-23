@@ -69,7 +69,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
             else:
                 set_dict[evict_line['set_id']] = [instance_dict]
             i += 1
-    print(f"instance_dict: {instance_dict} \n")
+            print(f"instance_dict: {instance_dict} \n")
     print(f"set_dict: {set_dict} \n")
 
     # with open(pred_file, 'r') as f_p:
