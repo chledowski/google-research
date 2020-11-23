@@ -32,8 +32,11 @@ def parse_outs(exp_folder, pred_f, evict_f):
     in_cache_line = False
     set_dict = {}
     instance_dict = {}
-    while i < 200000:
-        pred_line = next(pred_reader)
+    while True:
+        pred_line = next(pred_reader, None)
+        if pred_line is None:
+            print('Iterated through the pred file.')
+            break
         # print(pred_line)
         if 'PC' in pred_line:
             instance_dict['pc'] = pred_line.split(' ')[1]
@@ -68,7 +71,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
             else:
                 set_dict[evict_line['set_id']] = [instance_dict]
             i += 1
-            if i % 1000 == 0:
+            if i % 10000 == 0:
                 print(i)
             # print(f"instance_dict: {instance_dict} \n")
     print(f"set_dict: {set_dict} \n")
