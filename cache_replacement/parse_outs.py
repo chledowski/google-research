@@ -32,7 +32,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
         pred_line = next(pred_reader)
         print(pred_line)
         if pred_line == "":
-            evict_line = eval(next(evict_reader))
+            evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
             print(evict_line)
             print(evict_line["pc"])
             assert 1
