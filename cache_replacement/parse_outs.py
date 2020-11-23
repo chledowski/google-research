@@ -63,7 +63,10 @@ def parse_outs(exp_folder, pred_f, evict_f):
             assert instance_dict['pc'] == evict_line['pc'], f"PC does not match between pred ({instance_dict['pc']}) and evict ({evict_line['pc']}) file."
             assert instance_dict['address'] == evict_line[
                 'address'], f"Address does not match between pred ({instance_dict['address']}) and evict ({evict_line['address']}) file."
-            set_dict[evict_line['set_id']] = instance_dict
+            if evict_line['set_id'] in set_dict:
+                set_dict[evict_line['set_id']].append(instance_dict)
+            else:
+                set_dict[evict_line['set_id']] = [instance_dict]
             i += 1
             print(f"instance_dict: {instance_dict} \n")
             print(f"set_dict: {set_dict} \n")
