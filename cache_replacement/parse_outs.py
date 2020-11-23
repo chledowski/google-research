@@ -32,7 +32,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
     attention_dict = {}
     while i < 2:
         pred_line = next(pred_reader)
-        print(pred_line)
+        # print(pred_line)
         if 'PC' in pred_line:
             pc_check = pred_line.split(' ')[1]
         if 'Address' in pred_line:
@@ -45,7 +45,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
             print(2, pred_line)
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
-            print(evict_line)
+            # print(evict_line)
             print(evict_line['pc'])
             full_line_dict = evict_line
             # TODO: update with att dict
