@@ -32,13 +32,16 @@ def parse_outs(exp_folder, pred_f, evict_f):
         pred_line = next(pred_reader)
         print(pred_line)
         if 'PC' in pred_line:
-            pc = pred_line.split(' ')[1]
+            pc_check = pred_line.split(' ')[1]
+        if 'Address' in pred_line:
+            a_check = pred_line.split(' ')[1]
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
             print(evict_line)
             print(evict_line['pc'])
             full_line_dict = evict_line
-            assert pc == full_line_dict['pc']
+            assert pc_check == full_line_dict['pc'], "PC does not match between pred and evict file."
+            assert a_check == full_line_dict['address'], "Address does not match between pred and evict file."
             i += 1
 
     # with open(pred_file, 'r') as f_p:
