@@ -1,5 +1,6 @@
 import argparse
 import os
+import math
 
 
 def reader(filename):
@@ -57,7 +58,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
             instance_dict['cache_lines_reuse_distance'].append(cache_line[6])
 
         if pred_line == "":
-            evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
+            evict_line = eval(next(evict_reader).replace('Infinity', 'math.inf').replace('false', 'False').replace('true', 'True'))
             instance_dict['evict'] = evict_line['evict']
 
             # assert instance_dict['pc'] == evict_line['pc'], f"PC does not match between pred ({instance_dict['pc']}) and evict ({evict_line['pc']}) file."
