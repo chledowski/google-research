@@ -32,7 +32,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
     in_cache_line = False
     set_dict = {}
     instance_dict = {}
-    while i < 30:
+    while i < 200000:
         pred_line = next(pred_reader)
         # print(pred_line)
         if 'PC' in pred_line:
