@@ -16,23 +16,25 @@ def parse_outs(exp_folder, pred_f, evict_f):
     pred_reader = reader(pred_file)
     evict_reader = reader(evict_file)
 
-    pred_lines = 0
-    evict_lines = 0
-    for pred_line in pred_reader:
-        if pred_line == "":
-            pred_lines += 1
-    for evict_line in evict_reader:
-        evict_lines += 1
+    i = 0
 
-    print(10, pred_lines, evict_lines)
-
-    # while True:
-    #     pred_line = next(pred_reader)
-    #     print(pred_line)
+    # pred_lines = 0
+    # evict_lines = 0
+    # for pred_line in pred_reader:
     #     if pred_line == "":
-    #         evict_line = next(evict_reader)
-    #         print(evict_line)
-    #         i += 1
+    #         pred_lines += 1
+    # for evict_line in evict_reader:
+    #     evict_lines += 1
+    #
+    # print(10, pred_lines, evict_lines)
+
+    while i < 2:
+        pred_line = next(pred_reader)
+        print(pred_line)
+        if pred_line == "":
+            evict_line = next(evict_reader)
+            print(evict_line)
+            i += 1
 
     # with open(pred_file, 'r') as f_p:
     #     with open(evict_file, 'r') as f_e:
