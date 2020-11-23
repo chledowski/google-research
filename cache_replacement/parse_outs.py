@@ -51,11 +51,11 @@ def parse_outs(exp_folder, pred_f, evict_f):
         if in_cache_line and pred_line[:3] == '|  ':
             cache_line = pred_line.strip(' ').split('|')
             print(cache_line)
-            instance_dict['cache_lines_pc'].append(cache_line[1])
-            instance_dict['cache_lines_address'].append(cache_line[2])
-            instance_dict['cache_lines_pred_rank'].append(cache_line[3])
-            instance_dict['cache_lines_prob'].append(cache_line[4])
-            instance_dict['cache_lines_reuse_distance'].append(cache_line[6])
+            instance_dict['cache_lines_pc'].append(cache_line[2])
+            instance_dict['cache_lines_address'].append(cache_line[3])
+            instance_dict['cache_lines_pred_rank'].append(cache_line[4])
+            instance_dict['cache_lines_prob'].append(cache_line[5])
+            instance_dict['cache_lines_reuse_distance'].append(cache_line[7])
 
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('Infinity', 'math.inf').replace('false', 'False').replace('true', 'True'))
