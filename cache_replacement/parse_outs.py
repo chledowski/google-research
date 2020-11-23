@@ -1,11 +1,22 @@
 import argparse
 import os
-import math
+# import math
+import pickle
 
 
 def reader(filename):
     for row in open(filename, "r"):
         yield row.strip()
+
+
+def save_obj(obj, name ):
+    with open('obj/'+ name + '.pkl', 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+
+def load_obj(name ):
+    with open('obj/' + name + '.pkl', 'rb') as f:
+        return pickle.load(f)
 
 
 def parse_outs(exp_folder, pred_f, evict_f):
@@ -75,6 +86,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
                 print(i)
             # print(f"instance_dict: {instance_dict} \n")
     print(f"set_dict: {set_dict} \n")
+
 
     # with open(pred_file, 'r') as f_p:
     #     with open(evict_file, 'r') as f_e:
