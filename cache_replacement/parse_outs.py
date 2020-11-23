@@ -28,6 +28,8 @@ def parse_outs(exp_folder, pred_f, evict_f):
     #
     # print(10, pred_lines, evict_lines)
 
+    in_cache_line = False
+    attention_dict = {}
     while i < 2:
         pred_line = next(pred_reader)
         print(pred_line)
@@ -35,14 +37,22 @@ def parse_outs(exp_folder, pred_f, evict_f):
             pc_check = pred_line.split(' ')[1]
         if 'Address' in pred_line:
             a_check = pred_line.split(' ')[1]
+        if 'Cache lines' in pred_line:
+            in_cache_line = True
+        if 'Attention' in pred_line:
+            in_cache_line = False
+        if in_cache_line and pred_line[:3] == '|  ':
+            print(2, pred_line)
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
             print(evict_line)
             print(evict_line['pc'])
             full_line_dict = evict_line
+            # TODO: update with att dict
             # assert pc_check == full_line_dict['pc'], "PC does not match between pred and evict file."
             # assert a_check == full_line_dict['address'], "Address does not match between pred and evict file."
             i += 1
+            attention_dict = {}
 
     # with open(pred_file, 'r') as f_p:
     #     with open(evict_file, 'r') as f_e:
