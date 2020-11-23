@@ -45,7 +45,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
             l = pred_line.strip(' ').split('|')
             print(l)
             att_pc = l
-            attention_dict{}
+            # attention_dict{}
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
             # print(evict_line)
