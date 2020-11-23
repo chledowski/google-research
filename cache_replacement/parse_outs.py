@@ -42,7 +42,10 @@ def parse_outs(exp_folder, pred_f, evict_f):
         if 'Attention' in pred_line:
             in_cache_line = False
         if in_cache_line and pred_line[:3] == '|  ':
-            print(2, pred_line.split('|'))
+            l = pred_line.strip(' ').split('|')
+            print(l)
+            att_pc = l
+            attention_dict{}
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
             # print(evict_line)
