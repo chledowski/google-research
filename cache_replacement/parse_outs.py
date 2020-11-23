@@ -31,11 +31,14 @@ def parse_outs(exp_folder, pred_f, evict_f):
     while i < 2:
         pred_line = next(pred_reader)
         print(pred_line)
+        if 'PC' in pred_line:
+            pc = pred_line.split(' ')[1]
         if pred_line == "":
             evict_line = eval(next(evict_reader).replace('false', 'False').replace('true', 'True'))
             print(evict_line)
-            print(evict_line["pc"])
-            assert 1
+            print(evict_line['pc'])
+            full_line_dict = evict_line
+            assert pc == full_line_dict['pc']
             i += 1
 
     # with open(pred_file, 'r') as f_p:
