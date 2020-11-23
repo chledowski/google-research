@@ -9,12 +9,12 @@ def reader(filename):
         yield row.strip()
 
 
-def save_obj(obj, name ):
-    with open('obj/'+ name + '.pkl', 'wb') as f:
+def save_obj(obj, name):
+    with open('obj/' + name + '.pkl', 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 
-def load_obj(name ):
+def load_obj(name):
     with open('obj/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
@@ -85,7 +85,9 @@ def parse_outs(exp_folder, pred_f, evict_f):
             if i % 10000 == 0:
                 print(i)
             # print(f"instance_dict: {instance_dict} \n")
-    print(f"set_dict: {set_dict} \n")
+    # print(f"set_dict: {set_dict} \n")
+    print("Saving..")
+    save_obj(set_dict, 'test')
 
 
     # with open(pred_file, 'r') as f_p:
