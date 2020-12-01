@@ -49,7 +49,6 @@ def parse_outs(exp_folder, pred_f, evict_f):
         if pred_line is None:
             print('Iterated through the pred file.')
             break
-        print(pred_line)
         if 'PC' in pred_line:
             instance_dict['pc'] = pred_line.split(' ')[1]
         if 'Address' in pred_line:
@@ -83,12 +82,10 @@ def parse_outs(exp_folder, pred_f, evict_f):
             else:
                 set_dict[evict_line['set_id']] = [copy.deepcopy(instance_dict)]
             i += 1
-            if i % 10 == 0:
-                break
-                # print(i)
+            if i % 10000 == 0:
+                print(i)
             # print(f"instance_dict: {instance_dict} \n")
     # print(f"set_dict: {set_dict} \n")
-    print(set_dict)
     print("Saving..")
     save_obj(set_dict, args.out_file)
 
