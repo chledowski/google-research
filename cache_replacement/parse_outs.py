@@ -82,8 +82,9 @@ def parse_outs(exp_folder, pred_f, evict_f):
             else:
                 set_dict[evict_line['set_id']] = [instance_dict]
             i += 1
-            if i % 10000 == 0:
-                print(i)
+            if i % 10 == 0:
+                break
+                # print(i)
             # print(f"instance_dict: {instance_dict} \n")
     # print(f"set_dict: {set_dict} \n")
     print("Saving..")
