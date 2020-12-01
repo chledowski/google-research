@@ -48,7 +48,7 @@ def parse_outs(exp_folder, pred_f, evict_f):
         if pred_line is None:
             print('Iterated through the pred file.')
             break
-        # print(pred_line)
+        print(pred_line)
         if 'PC' in pred_line:
             instance_dict['pc'] = pred_line.split(' ')[1]
         if 'Address' in pred_line:
@@ -74,9 +74,9 @@ def parse_outs(exp_folder, pred_f, evict_f):
             evict_line = eval(next(evict_reader).replace('Infinity', 'math.inf').replace('false', 'False').replace('true', 'True'))
             instance_dict['evict'] = evict_line['evict']
 
-            # assert instance_dict['pc'] == evict_line['pc'], f"PC does not match between pred ({instance_dict['pc']}) and evict ({evict_line['pc']}) file."
-            # assert instance_dict['address'] == evict_line[
-            #     'address'], f"Address does not match between pred ({instance_dict['address']}) and evict ({evict_line['address']}) file."
+            assert instance_dict['pc'] == evict_line['pc'], f"PC does not match between pred ({instance_dict['pc']}) and evict ({evict_line['pc']}) file."
+            assert instance_dict['address'] == evict_line[
+                'address'], f"Address does not match between pred ({instance_dict['address']}) and evict ({evict_line['address']}) file."
             if evict_line['set_id'] in set_dict:
                 set_dict[evict_line['set_id']].append(instance_dict)
             else:
