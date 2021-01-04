@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DEVICE=$1
 DATASET=$2
 
