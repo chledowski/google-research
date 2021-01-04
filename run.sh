@@ -1,9 +1,13 @@
 DEVICE=$1
 DATASET=$2
 
+set -x
+
+SPLITS="train valid test"
+STRATEGIES="lru belady"
 #tringVal="train valid test"
-for split in "train valid test"; do
-  for strategy in "lru belady"; do
+for split in $SPLITS; do
+  for strategy in $STRATEGIES; do
     echo "${split}"
     echo "${strategy}"
     CUDA_VISIBLE_DEVICES=${DEVICE} python3 -m cache_replacement.policy_learning.cache.main \
